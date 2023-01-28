@@ -1,4 +1,4 @@
-var staticCacheName = "canvas";
+var staticCacheName = "canvasEditor";
 
 self.addEventListener("install", function (e) {
 e.waitUntil(
