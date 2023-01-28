@@ -39,6 +39,9 @@ function notify(message) {
 document.getElementById("alert-message").innerHTML = message;
 show(notification);
 }
+function appWindow(website) {
+  window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
+}
 function addImage() {
 var img = document.getElementById("img");
 var imageSource = prompt("Enter image URL");
