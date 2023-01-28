@@ -22,12 +22,8 @@
 </div>
 <!-- control area -->
 <div id="sidebar" onclick="backup()">
-<a href="files.html" target="_blank">
-<button class="fillWidth sidebarButton">Projects <span class="material-icons">source</span></button>
-</a>
-<a href="#" target="_blank">
-<button class="fillWidth sidebarButton">New file <span class="material-icons">add</span></button>
-</a>
+<button class="fillWidth sidebarButton" onclick="appWindow('files.html')">Projects <span class="material-icons">source</span></button>
+<button class="fillWidth sidebarButton" onclick="appWindow('index.html')">New file <span class="material-icons">add</span></button>
 <br><br>
 <button class="fillWidth sidebarButton" onclick="fillPage()">Fill page <span class="material-icons">format_color_fill</span></button>
 <button class="fillWidth sidebarButton" onclick="addImage()">Add image <span class="material-icons">camera_roll</span></button>
