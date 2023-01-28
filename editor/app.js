@@ -47,13 +47,6 @@ var top = prompt("Place image how many pixels from the top:");
 img.src = imageSource;
 ctx.drawImage(img, left, top);
 }
-//add image from previously edited file
-if (window.location.href.indexOf("?file=") != -1) {
-  var img = document.getElementById("img");
-  var imageSource = localStorage.getItem(window.location.href.split("=")[1]);
-  img.src = imageSource;
-  ctx.drawImage(img, 0, 0);
-}
 function addText() {
 notify("Text is automatically centered");
 var text = prompt("Enter text:");
@@ -195,4 +188,12 @@ function draw(event) {
   reposition(event);
   ctx.lineTo(coord.x, coord.y);
   ctx.stroke();
+}
+
+//add image from previously edited file
+if (window.location.href.indexOf("?file=") != -1) {
+  var img = document.getElementById("img");
+  var imageSource = localStorage.getItem(window.location.href.split("=")[1]);
+  img.src = imageSource;
+  ctx.drawImage(img, 0, 0);
 }
