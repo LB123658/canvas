@@ -193,7 +193,7 @@ function draw(event) {
 //add image from previously edited file
 if (window.location.href.indexOf("?file=") != -1) {
   var img = document.getElementById("img");
-  var imageSource = localStorage.getItem(window.location.href.split("=")[1]);
-  img.src = imageSource;
+  var recentFileSource = localStorage.getItem(window.location.href.split("=")[1]);
+  img.src = recentFileSource;
   ctx.drawImage(img, 0, 0);
 }
