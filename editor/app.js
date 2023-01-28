@@ -131,7 +131,7 @@ function saveFile() {
     backup();
   }
   catch (e) {
-  if (e == QUOTA_EXCEEDED_ERR) {
+  if (e.code == 22) {
     notify("Unable to save file because Editor storage is full"); //data wasn't successfully saved due to quota exceed so throw an error
   }
   }
