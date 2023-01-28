@@ -1,0 +1,22 @@
+{
+	"name":"Editor - free photo editing and drawing",
+	"short_name":"Editor",
+	"start_url":"index.html",
+	"display":"standalone",
+	"background_color":"#202124",
+	"theme_color":"#202124",
+	"scope": ".",
+	"description":"A free drawing, photo, and text editor.",
+	"icons":[
+	{
+	"src":"images/favicon.png",					
+	"sizes":"192x192",
+	"type":"image/png"
+	},
+	{
+	"src":"images/favicon.png",
+	"sizes":"512x512",
+	"type":"image/png"
+	}
+]
+}

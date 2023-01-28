@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body {
+  background: #202124;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+}
+input {
+  user-select: auto;
+  -webkit-user-select: auto;
+  background: transparent;
+  cursor: auto;
+}
+button {
+  background: #303134;
+  color: white;
+  border-radius: 0px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  cursor: default;
+  font-size: 17px;
+  height: 30px;
+}
+button:hover {
+  color: lightgrey;
+  background: #3d3e42;
+  background-image: linear-gradient(to bottom right, #303134, grey);
+}
+button:focus {
+  color: white;
+  border: 1px solid grey;
+}
+
+/* class styles */
+.fillWidth {
+  width: 100%;
+}
+.fillHeight {
+  height: 100%;
+}
+.sidebarButton {
+  margin: 5px 0px 5px 0px;
+  transform: scale(0.9);
+}
+.material-icons {
+  float: right;
+}
+.off {
+  opacity: 0.7;
+  cursor: default;
+  pointer-events: none;
+  border: 1px solid transparent;
+}
+
+/* specific elements */
+#alert {
+  z-index: 3;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  max-height: 400px;
+  margin: -75px -175px;
+  background: #202124;
+  box-shadow: 20px 20px 50px grey;
+  padding: 0px 20px 10px 20px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  background-image: linear-gradient(to bottom right, #303134, grey);
+  }
+#page {
+  position: fixed;
+  top: 0px;
+  left: 150px;
+  height: 100%;
+  width: calc(100% - 150px);
+  background: white;
+  background-image: linear-gradient(to bottom right, white, grey);
+  overflow: auto;
+}
+#sidebar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  overflow: auto;
+}
+#canvas {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: calc(100% - 100px);
+  margin-bottom: 50px;
+  cursor: crosshair;
+  box-shadow: 20px 20px 50px grey;
+}
+#shadow {
+  z-index: 4;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+#export-page {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  z-index: 5;
+  background: #202124;
+  padding: 20px 20px 20px 20px;
+  margin-left: -20px;
+  box-shadow: 20px 20px 50px grey;
+  visibility: hidden;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  overflow: auto;
+}
+#export-page textarea {
+  width: 100%;
+  height: 60px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  outline: none;
+  resize: none;
+}
+#export-page button {
+  float: right;
+  margin: 10px 0px 0px 10px;
+}
+#export-img {
+  height: 50%;
+  background-image: url("background.png");
+}
+#ee:focus {
+  cursor: progress;
+}
