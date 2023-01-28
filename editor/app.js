@@ -119,6 +119,16 @@ var fileUrl = canvas.toDataURL();
 localStorage.setItem(projectKey, fileUrl);
 console.log(projectKey + "." + editNumber + " saved");
 }
+function saveFile() {
+  try {
+    backup();
+  }
+  catch (e) {
+  if (e == QUOTA_EXCEEDED_ERR) {
+    notify("Unable to save file because Editor storage is full"); //data wasn't successfully saved due to quota exceed so throw an error
+  }
+  }
+}
 //css style
 function style(element,css,data) {
 var style;
