@@ -22,7 +22,12 @@
 </div>
 <!-- control area -->
 <div id="sidebar" onclick="backup()">
-<button class="fillWidth sidebarButton" onclick="notify(app.about)">About Editor</button>
+<a href="files.html" target="_blank">
+<button class="fillWidth sidebarButton">Projects <span class="material-icons">source</span></button>
+</a>
+<a href="#" target="_blank">
+<button class="fillWidth sidebarButton">New file <span class="material-icons">add</span></button>
+</a>
 <br><br>
 <button class="fillWidth sidebarButton" onclick="fillPage()">Fill page <span class="material-icons">format_color_fill</span></button>
 <button class="fillWidth sidebarButton" onclick="addImage()">Add image <span class="material-icons">camera_roll</span></button>
@@ -44,6 +49,7 @@
 <a href="help.html" target="_blank">
 <button class="fillWidth sidebarButton">Help <span class="material-icons">help_outline</span></button>
 </a>
+<button class="fillWidth sidebarButton" onclick="notify(app.about)">About Editor</button>
 </div>
 <!-- export -->
 <div id="shadow"></div>
