@@ -91,7 +91,7 @@ function updateFavicon() {
 var fileUrl = canvas.toDataURL();
 favicon.href = fileUrl;
 }
-setInterval(updateFavicon, 60000);
+//setInterval(updateFavicon, 60000);
 function preview() {
 var fileUrl = canvas.toDataURL();
 window.open(fileUrl);
