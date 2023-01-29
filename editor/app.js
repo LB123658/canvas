@@ -39,7 +39,7 @@ function notify(message) {
 document.getElementById("alert-message").innerHTML = message;
 show(notification);
 }
-function appWindow(website) {
+function webAppWindow(website) {
   window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
 }
 function addImage() {
@@ -125,6 +125,7 @@ console.log(projectKey + "." + editNumber + " saved");
 function saveFile() {
   try {
     backup();
+    notify("File successfully saved");
   }
   catch (e) {
   if (e.code == 22) {
