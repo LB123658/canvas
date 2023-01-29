@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body {
+  background: white;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+input {
+  user-select: auto;
+  -webkit-user-select: auto;
+  background: transparent;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  cursor: auto;
+  color: #202124;
+  height: 40px;
+  padding: 0px 10px 0px 10px;
+  outline: none;
+}
+button {
+  background: #303134;
+  color: white;
+  border-radius: 0px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  cursor: default;
+  font-size: 17px;
+  height: 30px;
+}
+button:hover {
+  color: lightgrey;
+  background: #3d3e42;
+  background-image: linear-gradient(to bottom right, #303134, grey);
+}
+button:focus {
+  color: white;
+  border: 1px solid grey;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #9451a8;
+}
+a {
+  color: #9451a8;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+p {
+  color: #202124;
+}
+/* class styles */
+.fillWidth {
+  width: 100%;
+}
+.fillHeight {
+  height: 100%;
+}
+.off {
+  opacity: 0.7;
+  cursor: default;
+  pointer-events: none;
+  border: 1px solid transparent;
+}
+
+/* elements */
+#top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 60px;
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #202124;
+}
+#top img {
+  margin: 10px;
+  background: lightgrey;
+  height: 40px;
+  width: 40px;
+}
+#top input {
+  margin: 10px;
+  float: right;
+  width: calc(100% - 235px);
+}
