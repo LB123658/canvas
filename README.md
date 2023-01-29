@@ -9,4 +9,3 @@ Currently has
 * Drawing
 * Settings to set blur, contrast, brightness, or adjust color
 
-![Editor](editor/images/screenshot.png)
