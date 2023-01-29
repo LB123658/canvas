@@ -3,9 +3,7 @@ body {
   background: white;
   outline: none;
   font-family: 'Montserrat', sans-serif;
-  user-select: none;
-  -webkit-user-select: none;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 * {
   font-family: 'Montserrat', sans-serif;
@@ -73,13 +71,15 @@ p {
 
 /* elements */
 #top {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   height: 60px;
   display: flex;
   width: 100%;
   border-bottom: 2px solid #9451a8;
+  z-index: 1;
+  background: white;
 }
 #top img {
   margin: 10px;
@@ -90,4 +90,23 @@ p {
   margin: 10px;
   float: right;
   width: calc(100% - 235px);
+}
+#sidebar {
+  position: fixed;
+  top: 60px;
+  height: 100%;
+  padding: 10px;
+  width: 250px;
+  border-right: 2px solid #9451a8;
+  overflow: auto;
+}
+#content {
+  position: absolute;
+  padding: 20px;
+  top: 60px;
+  left: 270px;
+  width: calc(100% - 310px);
+  height: 100%;
+  user-select: auto;
+  -webkit-user-select: auto;
 }
