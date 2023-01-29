@@ -79,11 +79,10 @@ p {
   height: 60px;
   display: flex;
   width: 100%;
-  border-bottom: 2px solid #202124;
+  border-bottom: 2px solid #9451a8;
 }
 #top img {
   margin: 10px;
-  background: lightgrey;
   height: 40px;
   width: 40px;
 }
