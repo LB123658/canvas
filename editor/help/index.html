@@ -9,13 +9,16 @@
 </head>
 <body>
 <div id="top">
-<img src="../images/favicon.png">
+<img src="../images/favicon.png" onclick="location.reload();" style="cursor:pointer;" title="Help">
 <h2>Editor help</h2>
 <input type="text" autocomplete="off" placeholder="Search topics" id="search">
 </div>
 <div id="sidebar"></div>
-<div id="content"></div>
-
+<div id="content">
+  <h2>Welcome to Editor help</h2>
+  <p>Search for topics to help solve an issue with Editor.</p>
+  <a href="../index.html" target="_blank">Open Editor <span class="material-icons" style="font-size: 14px">launch</span></a>
+</div>
 <script src="app.js"></script>
 </body>
 </html>
