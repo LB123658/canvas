@@ -9,3 +9,4 @@ Currently has
 * Drawing
 * Settings to set blur, contrast, brightness, or adjust color
 
+![logo](poster.png)
