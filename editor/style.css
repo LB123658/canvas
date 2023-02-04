@@ -17,9 +17,6 @@ input {
   background: transparent;
   cursor: auto;
 }
-form {
-  width: 100%;
-}
 button {
   background: #303134;
   color: white;
