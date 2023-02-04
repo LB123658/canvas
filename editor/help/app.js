@@ -15,3 +15,7 @@ content.innerHTML = htmlCode;
 for (let i = 0; i < question.length ;i++) {
   loadLink(i);
 }
+
+if (location.search.split("=")[1].length > 0) {
+  loadContent(location.search.split("=")[1]);
+}
