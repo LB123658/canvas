@@ -23,6 +23,7 @@ input {
 }
 form {
   width: calc(100% - 235px);
+  float: right;
 }
 button {
   background: #303134;
@@ -91,7 +92,6 @@ p {
 }
 #top input {
   margin: 10px;
-  float: right;
   width: 100%;
 }
 #sidebar {
