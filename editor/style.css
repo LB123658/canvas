@@ -14,8 +14,19 @@ body {
 input {
   user-select: auto;
   -webkit-user-select: auto;
-  background: transparent;
   cursor: auto;
+  background: #303134;
+  color: white;
+  border-radius: 0px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  font-size: 17px;
+  height: 30px;
+}
+input:focus {
+  outline: none;
+  box-shadow: 20px 20px 50px grey;
 }
 button {
   background: #303134;
@@ -57,6 +68,10 @@ button:focus {
   cursor: default;
   pointer-events: none;
   border: 1px solid transparent;
+}
+.dimension-input {
+  width: 100%;
+  margin: 5px 0px 5px 0px;
 }
 
 /* specific elements */
@@ -112,11 +127,11 @@ button:focus {
   height: 100%;
   width: 100%;
   background: rgb(0, 0, 0, 0.5);
-  visibility: hidden;
+  visibility: visible;
 }
 #export-page {
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 10%;
   width: 80%;
   height: 60%;
@@ -124,6 +139,7 @@ button:focus {
   background: #202124;
   padding: 20px 20px 20px 20px;
   margin-left: -20px;
+  margin-top: -30%;
   box-shadow: 20px 20px 50px grey;
   visibility: hidden;
   border: 1px solid grey;
@@ -150,4 +166,19 @@ button:focus {
 }
 #ee:focus {
   cursor: progress;
+}
+#dimension-page {
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 200px;
+  margin: -75px -100px;
+  background: #202124;
+  box-shadow: 20px 20px 50px grey;
+  padding: 0px 20px 10px 20px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
 }
