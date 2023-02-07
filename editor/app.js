@@ -1,6 +1,6 @@
 // variables
 var app = {
-  about: "Editor<br>Version 1.0.0<br>" + navigator.appVersion,
+  about: "Editor<br>Version 1.1.0<br>" + navigator.appVersion,
   link: window.location.href
 }
 var notification = document.getElementById("alert");
@@ -24,11 +24,13 @@ var hueRotateValue = 0;
 var canvasFilter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
 var projectKey = Math.round(Math.random() * 1000000);
 var editNumber = 0;
+var ctx = canvas.getContext("2d");
+var ratio = canvas.height / canvas.width;
+var inputHeight;
+var inputWidth;
+var dimensionPage = document.getElementById("dimension-page");
 
-//onload saving history
-localStorage.setItem("fileHistory", projectKey + "; " + localStorage.getItem("fileHistory"));
-
-//functions
+//basic functions 
 function show(element) {
 element.style.visibility = "visible";
 }
@@ -39,6 +41,37 @@ function notify(message) {
 document.getElementById("alert-message").innerHTML = message;
 show(notification);
 }
+
+//FUNCTIONS TO SET UP PAGE CORRECTLY
+//onload saving history
+localStorage.setItem("fileHistory", projectKey + "; " + localStorage.getItem("fileHistory"));
+
+//focus width input
+document.getElementById("page-width-input").focus();
+
+//set correct height to width ratio
+function setCanvasDimensions() {
+inputHeight = document.getElementById("page-height-input").value;
+inputWidth = document.getElementById("page-width-input").value;
+canvas.height = inputHeight;
+canvas.width = inputWidth;
+ratio = canvas.height / canvas.width;
+hide(shadow);
+hide(dimensionPage);
+}
+//hide notification box
+hide(notification);
+
+//add image from previously edited file
+if (window.location.href.indexOf("?file=") != -1) {
+  var img = document.getElementById("img");
+  var recentFileSource = localStorage.getItem(window.location.href.split("=")[1]);
+  img.src = recentFileSource;
+  ctx.drawImage(img, 0, 0);
+}
+
+// EDITOR BUTTON FUNCTIONS
+//functions
 function webAppWindow(website) {
   window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
 }
@@ -51,7 +84,7 @@ img.src = imageSource;
 ctx.drawImage(img, left, top);
 }
 function addText() {
-notify("Text is automatically centered");
+notify("Text has been automatically centered");
 var text = prompt("Enter text:");
 var textFont0 = prompt("Enter text pixel height:");
 var textFont1 = prompt("Enter text font name:");
@@ -60,7 +93,7 @@ var textColor = prompt("Enter text color:");
 ctx.font = textFont;
 ctx.fillStyle = textColor;
 ctx.textAlign = "center";
-ctx.fillText(text, canvas.width/2, canvas.height/2);
+ctx.fillText(text, canvas.width/2, (canvas.height + (0.5 * textFont0))/2);
 }
 function brushSize() {
 paintbrushWidth = prompt("Enter brushstroke width in pixels:")
@@ -76,28 +109,21 @@ function exportF() {
 var fileUrl = canvas.toDataURL();
 exportImg.src = fileUrl;
 exportLink.value = fileUrl;
-exportInfo.innerHTML = "Image details<br>Type: PNG<br>2000 x 1500 pixels (" + (Math.round((fileUrl.length)*3/4))/1000000 + " MB)";
+exportInfo.innerHTML = "Image details<br>Type: PNG<br>" + canvas.width + " x " + canvas.height + " pixels (" + (Math.round((fileUrl.length)*3/4))/1000000 + " MB)";
 exportDownload.href = fileUrl;
+exportPage.style.height = (window.innerHeight * 0.6 * 0.5) + 200 + "px";
+exportPage.style.marginTop = -(exportPage.style.height.split("px")[0] / 2) + "px";
 show(shadow);
 show(exportPage);
 }
-function coptFileLink() {
-exportLink.value.select();
-navigator.clipboard.writeText(exportLink.value);
+function copyFileLink() {
+var fileUrl = canvas.toDataURL();
+navigator.clipboard.writeText(fileUrl);
 notify("Link copied");
 }
 function details() {
 var fileUrl = canvas.toDataURL();
-notify("Image details<br>Dimensions: 2000 x 1500 pixels<br>File type: PNG<br>File size: " + (Math.round((fileUrl.length)*3/4))/1000000 + " MB");
-}
-function updateFavicon() {
-var fileUrl = canvas.toDataURL();
-favicon.href = fileUrl;
-}
-//setInterval(updateFavicon, 60000);
-function preview() {
-var fileUrl = canvas.toDataURL();
-window.open(fileUrl);
+notify("Image details<br>Dimensions: " + canvas.width + " x " + canvas.height + " pixels<br>File type: PNG<br>File size: " + (Math.round((fileUrl.length)*3/4))/1000000 + " MB");
 }
 function setBlur() {
 blurValue = prompt("Enter blur level (0 = no blur):");
@@ -133,27 +159,6 @@ function saveFile() {
   }
   }
 }
-//css style
-function style(element,css,data) {
-var style;
-if (css.indexOf("-") != -1) {
-  var dash = css.indexOf("-");
-  var uppercase = css.slice(dash+1, dash+2).toUpperCase();
-  style = css.split("-")[0] + uppercase + css.slice(dash+2, css.length)
-} else {
-  style = css;
-}
-var script = document.createElement("script");
-script.innerHTML = element + ".style." + style + " = \"" + data + "\"";
-document.body.appendChild(script);
-console.log(script.innerHTML);
-}
-// example function style("notification","border-radius","0px");
-
-hide(notification);
-
-//CANVAS
-var ctx = canvas.getContext("2d");
 function fillPage() {
 var canvasBackgroundColor = prompt("Enter color to fill page (this will cover up all previous edits):")
 ctx.beginPath();
@@ -162,16 +167,17 @@ ctx.fillStyle = canvasBackgroundColor;
 ctx.fill();
 }
 
-//drawimg
+//DRAWING 
 let coord = { x: 0, y: 0 };
 
 canvas.addEventListener("mousedown", start);
 canvas.addEventListener("mouseup", stop);
 
+//adjust cursor position to pixel on canvas even when resizing page
 function reposition(event) {
- if (event.clientX < window.innerWidth - 50 && event.clientX > 200 && event.clientY < (((window.innerWidth - 250) * 0.75) + 50) && event.clientY > 50) {
-  coord.x = (((event.clientX - (canvas.offsetLeft + 150)) / (window.innerWidth - 250)) * 2000);
-  coord.y = (((event.clientY - canvas.offsetTop) / ((window.innerWidth - 250) * 0.75)) * 1500);
+ if (event.clientX < window.innerWidth - 50 && event.clientX > 200 && event.clientY < (((window.innerWidth - 250) * ratio) + 50) && event.clientY > 50) {
+  coord.x = (((event.clientX - (canvas.offsetLeft + 150)) / (window.innerWidth - 250)) * canvas.width);
+  coord.y = (((event.clientY - canvas.offsetTop) / ((window.innerWidth - 250) * ratio)) * canvas.height);
   console.log(coord.x + " (" + canvas.offsetLeft + ") (" + (event.clientX - canvas.offsetLeft) + "), " + coord.y);
 } else {
 }
@@ -192,12 +198,4 @@ function draw(event) {
   reposition(event);
   ctx.lineTo(coord.x, coord.y);
   ctx.stroke();
-}
-
-//add image from previously edited file
-if (window.location.href.indexOf("?file=") != -1) {
-  var img = document.getElementById("img");
-  var recentFileSource = localStorage.getItem(window.location.href.split("=")[1]);
-  img.src = recentFileSource;
-  ctx.drawImage(img, 0, 0);
 }
