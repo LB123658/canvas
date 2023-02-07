@@ -17,7 +17,7 @@
 </div>
 <!-- photo area -->
 <div id="page">
-  <canvas id="canvas" width="2000" height="1500"></canvas>
+  <canvas id="canvas" width="500" height="500"></canvas>
   <br><br>
 </div>
 <!-- control area -->
@@ -59,7 +59,13 @@
 <button onclick="copyFileLink()">Copy link</button>
 <button onclick="hide(shadow); hide(exportPage); hide(notification)">Cancel</button>
 </div>
-
+<!-- canvas dimension setting -->
+<div id="dimension-page">
+<p>Set dimensions for the page </p>
+<input id="page-width-input" autocomplete="off" class="dimension-input" placeholder="Width (px)">
+<input id="page-height-input" autocomplete="off" class="dimension-input" placeholder="Height (px)">
+<button onclick="setCanvasDimensions()" style="margin-top:10px;">Continue</button>
+</div>
 <!-- for pwa -->
 <script>
 	window.addEventListener('load', () => {
