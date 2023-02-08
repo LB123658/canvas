@@ -73,6 +73,28 @@ button:focus {
   width: 100%;
   margin: 5px 0px 5px 0px;
 }
+.hover-box {
+  width: 300px;
+  background: #202124;
+  box-shadow: 20px 20px 50px grey;
+  padding: 0px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  z-index: 2;
+  transform: translateY(-25px);
+  visibility: hidden;
+}
+.hover-box::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -50px;
+  width: 0px;
+  height: 0px;
+  background: transparent;
+  border: 30px solid transparent;
+  border-right: 30px solid #202124;
+}
 
 /* specific elements */
 #alert {
@@ -181,4 +203,16 @@ button:focus {
   border: 1px solid grey;
   border-top: 1px solid #c2bebe;
   border-right: 1px solid #c2bebe;
+}
+
+/* hover tools */
+#fill-page-hover {
+  position: absolute;
+  top: 106px;
+  left: 175px;
+}
+#add-image-hover {
+  position: absolute;
+  top: 106px;
+  left: 175px;
 }
