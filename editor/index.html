@@ -10,23 +10,26 @@
 </head>
 <body>
 <img id="img" src="background.png" crossorigin="anonymous" style="width:2000px;opacity:0.001;z-index:-1000;">
+
 <!-- alert box -->
 <div id="alert">
 <p id="alert-message">There was an error loading this page. Try refreshing the page and making sure javascript is on.</p>
 <button onclick="hide(notification)">Close</button>
 </div>
+
 <!-- photo area -->
 <div id="page">
   <canvas id="canvas" width="500" height="500"></canvas>
   <br><br>
 </div>
+
 <!-- control area -->
 <div id="sidebar" onclick="backup()">
 <button class="fillWidth sidebarButton" onclick="webAppWindow('files/index.html')">Projects <span class="material-icons">source</span></button>
 <button class="fillWidth sidebarButton" onclick="webAppWindow('index.html')">New file <span class="material-icons">add</span></button>
 <br><br>
-<button class="fillWidth sidebarButton" onclick="fillPage()">Fill page <span class="material-icons">format_color_fill</span></button>
-<button class="fillWidth sidebarButton" onclick="addImage()">Add image <span class="material-icons">camera_roll</span></button>
+<button class="fillWidth sidebarButton" onclick="display(fillPageHover,this.getBoundingClientRect().top)">Fill page <span class="material-icons">format_color_fill</span></button>
+<button class="fillWidth sidebarButton" onclick="display(addImageHover,this.getBoundingClientRect().top)">Add image <span class="material-icons">camera_roll</span></button>
 <button class="fillWidth sidebarButton" onclick="addText()">Add text <span class="material-icons">text_fields</span></button>
 <br><br>
 <button class="fillWidth sidebarButton" onclick="brushSize()">Brush size <span class="material-icons">brush</span></button>
@@ -47,6 +50,24 @@
 </a>
 <button class="fillWidth sidebarButton" onclick="notify(app.about)">About Editor</button>
 </div>
+
+<!-- hover controls -->
+<div id="fill-page-hover" class="hover-box">
+<p>Select page fill color*<br><span style="color:grey;font-size:11px;">*This will cover and erase all previous edits</span></p>
+<input type="color" value="#ffffff">
+<br><br>
+<button onclick="hide(this.parentElement)">Close</button>
+<button onclick="fillPage()">Set color</button>
+</div>
+
+<div id="add-image-hover" class="hover-box">
+<p>Add an image<br><span style="color:grey;font-size:11px;">Paste image URL</span></p>
+<input type="text" autocomplete="off" placeholder="Image URL">
+<br><br>
+<button onclick="hide(this.parentElement)">Close</button>
+<button onclick="addImage()">Add image</button>
+</div>
+
 <!-- export -->
 <div id="shadow"></div>
 <div id="export-page">
@@ -59,6 +80,7 @@
 <button onclick="copyFileLink()">Copy link</button>
 <button onclick="hide(shadow); hide(exportPage); hide(notification)">Cancel</button>
 </div>
+
 <!-- canvas dimension setting -->
 <div id="dimension-page">
 <p>Set dimensions for the page </p>
@@ -66,6 +88,7 @@
 <input id="page-height-input" autocomplete="off" class="dimension-input" placeholder="Height (px)">
 <button onclick="setCanvasDimensions()" style="margin-top:10px;">Continue</button>
 </div>
+
 <!-- for pwa -->
 <script>
 	window.addEventListener('load', () => {
