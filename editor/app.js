@@ -1,6 +1,6 @@
 // variables
 var app = {
-  about: "Editor<br>Version 1.1.0<br>" + navigator.appVersion,
+  about: "Editor<br>Version 1.2.0<br>" + navigator.appVersion,
   link: window.location.href
 }
 var notification = document.getElementById("alert");
@@ -29,6 +29,9 @@ var ratio = canvas.height / canvas.width;
 var inputHeight;
 var inputWidth;
 var dimensionPage = document.getElementById("dimension-page");
+//hover boxes
+var fillPageHover = document.getElementById("fill-page-hover");
+var addImageHover = document.getElementById("add-image-hover");
 
 //basic functions 
 function show(element) {
@@ -40,6 +43,10 @@ element.style.visibility = "hidden";
 function notify(message) {
 document.getElementById("alert-message").innerHTML = message;
 show(notification);
+}
+function display(element,fromTop) {
+show(element);
+element.style.top = fromTop + "px";
 }
 
 //FUNCTIONS TO SET UP PAGE CORRECTLY
@@ -76,12 +83,9 @@ function webAppWindow(website) {
   window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
 }
 function addImage() {
-var img = document.getElementById("img");
-var imageSource = prompt("Enter image URL");
-var left = prompt("Place image how many pixels to the right:");
-var top = prompt("Place image how many pixels from the top:");
+var imageSource = addImageHover.getElementsByTagName("input")[0].value;
 img.src = imageSource;
-ctx.drawImage(img, left, top);
+ctx.drawImage(img, 0, 0);
 }
 function addText() {
 notify("Text has been automatically centered");
@@ -160,7 +164,7 @@ function saveFile() {
   }
 }
 function fillPage() {
-var canvasBackgroundColor = prompt("Enter color to fill page (this will cover up all previous edits):")
+var canvasBackgroundColor = fillPageHover.getElementsByTagName("input")[0].value;
 ctx.beginPath();
 ctx.rect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = canvasBackgroundColor;
