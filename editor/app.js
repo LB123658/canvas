@@ -62,24 +62,29 @@ element.style.top = fromTop + "px";
 //onload saving history
 if (window.location.href.indexOf("?file=") != -1) {
   fileSource = {
-    key: window.location.href.split("=")[1],
     w: localStorage.getItem(window.location.href.split("=")[1]).split("\"")[1].split("x")[0],
     h: localStorage.getItem(window.location.href.split("=")[1]).split("x")[1].split(";")[0],
     title: localStorage.getItem(window.location.href.split("=")[1]).split("; ")[1].split("\"")[0],
     link: localStorage.getItem(window.location.href.split("=")[1]).split(",\"")[1].split("\"")[0]
   }
+  projectKey = window.location.href.split("=")[1];
   canvas.width = fileSource.w;
   canvas.height = fileSource.h;
   img.src = fileSource.link;
   ctx.drawImage(img, 0, 0);
   hide(dimensionPage);
   hide(shadow);
+  if (localStorage.getItem("fileLog").indexOf(projectKey) < 0) {
+    localStorage.setItem("fileLog", "\"" + projectKey + "\"," + localStorage.getItem("fileLog"));
+  }
 } else {
   projectKey = Math.round(Math.random() * 1000000);
+  localStorage.setItem("fileLog", "\"" + projectKey + "\"," + localStorage.getItem("fileLog"));
+  var fileUrl = canvas.toDataURL();
+  localStorage.setItem(projectKey, "\"" + canvas.width + "x" + canvas.height + "; " + projectKey + "\",\"" + fileUrl + "\"");
 }
 //save to local storage
 function backup() {
-localStorage.setItem("fileLog", "\"" + projectKey + "\"," + localStorage.getItem("fileLog"));
 var fileUrl = canvas.toDataURL();
 localStorage.setItem(projectKey, "\"" + canvas.width + "x" + canvas.height + "; " + projectKey + "\",\"" + fileUrl + "\"");
 console.log(projectKey + " saved");
