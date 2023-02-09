@@ -30,20 +30,16 @@
 <br><br>
 <button class="fillWidth sidebarButton" onclick="display(fillPageHover,this.getBoundingClientRect().top)">Fill page <span class="material-icons">format_color_fill</span></button>
 <button class="fillWidth sidebarButton" onclick="display(addImageHover,this.getBoundingClientRect().top)">Add image <span class="material-icons">camera_roll</span></button>
-<button class="fillWidth sidebarButton" onclick="addText()">Add text <span class="material-icons">text_fields</span></button>
+<button class="fillWidth sidebarButton" onclick="display(addTextHover,this.getBoundingClientRect().top)">Add text <span class="material-icons">text_fields</span></button>
 <br><br>
-<button class="fillWidth sidebarButton" onclick="brushSize()">Brush size <span class="material-icons">brush</span></button>
-<button class="fillWidth sidebarButton" onclick="brushColor()">Brush color <span class="material-icons">palette</span></button>
-<button class="fillWidth sidebarButton" onclick="unselectBrush()">Unselect brush</button>
+<button class="fillWidth sidebarButton" onclick="display(setBrushHover,this.getBoundingClientRect().top)">Brush tool <span class="material-icons">brush</span></button>
+<button class="fillWidth sidebarButton" onclick="toggleBrush()" id="select-brush-button">Unselect brush</button>
 <br><br>
-<button class="fillWidth sidebarButton" onclick="setBlur()">Blur <span class="material-icons">blur_on</span></button>
-<button class="fillWidth sidebarButton" onclick="setContrast()">Contrast <span class="material-icons">contrast</span></button>
-<button class="fillWidth sidebarButton" onclick="setExposure()">Brightness <span class="material-icons">light_mode</span></button>
-<button class="fillWidth sidebarButton" onclick="setHueRotate()">Hue adjust <span class="material-icons">opacity</span></button>
+<button class="fillWidth sidebarButton" onclick="display(setFilterHover,this.getBoundingClientRect().top)">Filters <span class="material-icons">contrast</span></button>
 <br><br>
 <button class="fillWidth sidebarButton" onclick="saveFile()">Save <span class="material-icons">save</span></button>
 <button class="fillWidth sidebarButton" onclick="details()">Details <span class="material-icons">folder</span></button>
-<button class="fillWidth sidebarButton" onclick="unselectBrush(); notify('Large files may take longer to load. If unable to export, right click on image for options.'); exportF()" id="ee">Export <span class="material-icons">download</span></button>
+<button class="fillWidth sidebarButton" onclick="notify('Large files may take longer to load. If unable to export, right click on image for options.'); exportF()" id="ee">Export <span class="material-icons">download</span></button>
 <br><br>
 <a href="help/index.html" target="_blank">
 <button class="fillWidth sidebarButton">Help <span class="material-icons">help_outline</span></button>
@@ -68,6 +64,51 @@
 <button onclick="addImage()">Add image</button>
 </div>
 
+<div id="add-text-hover" class="hover-box">
+<p>Add customizable text<br><span style="color:grey;font-size:11px;">*Text size is in pixels, so its size on the page will be relative to the project's resolution.</span></p>
+<input type="text" autocomplete="off" placeholder="Text">
+<br><br>
+<input type="text" autocomplete="off" placeholder="Text size*">
+<br><br>
+<input type="text" autocomplete="off" placeholder="Font name">
+<br><br>
+<input type="color" value="#ffffff">
+<br><br>
+<button onclick="hide(this.parentElement)">Close</button>
+<button onclick="addText()">Add text</button>
+</div>
+
+<div id="set-brush-hover" class="hover-box">
+<p>Customize brush tool<br><span style="color:grey;font-size:11px;">*Brush size is in pixels, so its size on the page will be relative to the project's resolution.</span></p>
+<input type="text" autocomplete="off" placeholder="Brush size*">
+<br><br>
+<input type="color" value="#ffffff">
+<br><br>
+<button onclick="hide(this.parentElement)">Close</button>
+<button onclick="setBrush()">Select brush</button>
+</div>
+
+<div id="set-filter-hover" class="hover-box">
+<p>Set filters*<br><span style="color:grey;font-size:11px;">*Filters will apply starting with your next edit and will not be reverted to default unless manually done so. Hover over inputs for more details.</span></p>
+<label style="color:grey;font-size:11px;">Blur</label>
+<br>
+<input type="text" autocomplete="off" placeholder="Blur" title="Default value is 0. Blur value is in pixels so its space on the page will be relative to the project's resolution.">
+<br>
+<label style="color:grey;font-size:11px;">Contrast</label>
+<br>
+<input type="text" autocomplete="off" placeholder="Contrast" title="Default value is 100. Values below 100 will reduce image contrast. 0 will result in grey.">
+<br>
+<label style="color:grey;font-size:11px;">Brightness</label>
+<br>
+<input type="text" autocomplete="off" placeholder="Brightness" title="Default value is 100. 0 will make the image black and values above 100 can cause unexpected color changes.">
+<br>
+<label style="color:grey;font-size:11px;">Color invert</label>
+<br>
+<input type="text" autocomplete="off" placeholder="Invert" title="Default value is 0. 100 will fully invert colors and values less than 100 will result in more subtle color changes.">
+<br><br>
+<button onclick="hide(this.parentElement)">Close</button>
+<button onclick="applyFilters()">Apply filters</button>
+</div>
 <!-- export -->
 <div id="shadow"></div>
 <div id="export-page">
