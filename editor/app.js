@@ -22,8 +22,6 @@ var contrastValue = 100;
 var brightnessValue = 100;
 var invertValue = 0;
 var canvasFilter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + brightnessValue + "%) invert(" + invertValue + "deg)";
-var projectKey = Math.round(Math.random() * 1000000);
-var editNumber = 0;
 var ctx = canvas.getContext("2d");
 var ratio = canvas.height / canvas.width;
 var inputHeight;
@@ -37,6 +35,9 @@ var addImageHover = document.getElementById("add-image-hover");
 var addTextHover = document.getElementById("add-text-hover");
 var setBrushHover = document.getElementById("set-brush-hover");
 var setFilterHover = document.getElementById("set-filter-hover");
+//saving
+var projectKey;
+var fileSource;
 
 //basic functions 
 function show(element) {
@@ -59,7 +60,41 @@ element.style.top = fromTop + "px";
 
 //FUNCTIONS TO SET UP PAGE CORRECTLY
 //onload saving history
-localStorage.setItem("fileHistory", projectKey + "; " + localStorage.getItem("fileHistory"));
+if (window.location.href.indexOf("?file=") != -1) {
+  fileSource = {
+    key: window.location.href.split("=")[1],
+    w: localStorage.getItem(window.location.href.split("=")[1]).split("\"")[1].split("x")[0],
+    h: localStorage.getItem(window.location.href.split("=")[1]).split("x")[1].split(";")[0],
+    title: localStorage.getItem(window.location.href.split("=")[1]).split("; ")[1].split("\"")[0],
+    link: localStorage.getItem(window.location.href.split("=")[1]).split(",\"")[1].split("\"")[0]
+  }
+  canvas.width = fileSource.w;
+  canvas.height = fileSource.h;
+  img.src = fileSource.link;
+  ctx.drawImage(img, 0, 0);
+  hide(dimensionPage);
+  hide(shadow);
+} else {
+  projectKey = Math.round(Math.random() * 1000000);
+}
+//save to local storage
+function backup() {
+localStorage.setItem("fileLog", "\"" + projectKey + "\"," + localStorage.getItem("fileLog"));
+var fileUrl = canvas.toDataURL();
+localStorage.setItem(projectKey, "\"" + canvas.width + "x" + canvas.height + "; " + projectKey + "\",\"" + fileUrl + "\"");
+console.log(projectKey + " saved");
+}
+function saveFile() {
+  try {
+    backup();
+    notify("File successfully saved");
+  }
+  catch (e) {
+  if (e.code == 22) {
+    notify("Unable to save file because Editor storage is full"); //data wasn't successfully saved due to quota exceed so throw an error
+  }
+  }
+}
 
 //focus width input
 document.getElementById("page-width-input").focus();
@@ -79,14 +114,6 @@ hide(notification);
 
 //not allow brush select before brush values are set
 selectBrushButton.classList.add("off");
-
-//add image from previously edited file
-if (window.location.href.indexOf("?file=") != -1) {
-  var img = document.getElementById("img");
-  var recentFileSource = localStorage.getItem(window.location.href.split("=")[1]);
-  img.src = recentFileSource;
-  ctx.drawImage(img, 0, 0);
-}
 
 // EDITOR BUTTON FUNCTIONS
 //functions
@@ -165,24 +192,6 @@ notify("Link copied");
 function details() {
 var fileUrl = canvas.toDataURL();
 notify("Image details<br>Dimensions: " + canvas.width + " x " + canvas.height + " pixels<br>File type: PNG<br>File size: " + (Math.round((fileUrl.length)*3/4))/1000000 + " MB");
-}
-function backup() {
-editNumber++;
-localStorage.setItem("recentFile", projectKey);
-var fileUrl = canvas.toDataURL();
-localStorage.setItem(projectKey, fileUrl);
-console.log(projectKey + "." + editNumber + " saved");
-}
-function saveFile() {
-  try {
-    backup();
-    notify("File successfully saved");
-  }
-  catch (e) {
-  if (e.code == 22) {
-    notify("Unable to save file because Editor storage is full"); //data wasn't successfully saved due to quota exceed so throw an error
-  }
-  }
 }
 
 
