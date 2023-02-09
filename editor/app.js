@@ -1,6 +1,6 @@
 // variables
 var app = {
-  about: "Editor<br>Version 1.2.0<br>" + navigator.appVersion,
+  about: "Editor<br>Version 2.0.0<br>" + navigator.appVersion,
   link: window.location.href
 }
 var notification = document.getElementById("alert");
@@ -19,9 +19,9 @@ var fileUrl;
 var favicon = document.getElementById("favicon");
 var blurValue = 0;
 var contrastValue = 100;
-var exposureValue = 100;
-var hueRotateValue = 0;
-var canvasFilter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
+var brightnessValue = 100;
+var invertValue = 0;
+var canvasFilter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + brightnessValue + "%) invert(" + invertValue + "deg)";
 var projectKey = Math.round(Math.random() * 1000000);
 var editNumber = 0;
 var ctx = canvas.getContext("2d");
@@ -29,9 +29,14 @@ var ratio = canvas.height / canvas.width;
 var inputHeight;
 var inputWidth;
 var dimensionPage = document.getElementById("dimension-page");
+var brushInUse = 0;
+var selectBrushButton = document.getElementById("select-brush-button");
 //hover boxes
 var fillPageHover = document.getElementById("fill-page-hover");
 var addImageHover = document.getElementById("add-image-hover");
+var addTextHover = document.getElementById("add-text-hover");
+var setBrushHover = document.getElementById("set-brush-hover");
+var setFilterHover = document.getElementById("set-filter-hover");
 
 //basic functions 
 function show(element) {
@@ -45,6 +50,9 @@ document.getElementById("alert-message").innerHTML = message;
 show(notification);
 }
 function display(element,fromTop) {
+  for (let i = 0; i < document.getElementsByClassName("hover-box").length; i++) {
+    document.getElementsByClassName("hover-box")[i].style.visibility = "hidden";
+  }
 show(element);
 element.style.top = fromTop + "px";
 }
@@ -69,6 +77,9 @@ hide(dimensionPage);
 //hide notification box
 hide(notification);
 
+//not allow brush select before brush values are set
+selectBrushButton.classList.add("off");
+
 //add image from previously edited file
 if (window.location.href.indexOf("?file=") != -1) {
   var img = document.getElementById("img");
@@ -82,32 +93,58 @@ if (window.location.href.indexOf("?file=") != -1) {
 function webAppWindow(website) {
   window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
 }
+function fillPage() {
+var canvasBackgroundColor = fillPageHover.getElementsByTagName("input")[0].value;
+ctx.beginPath();
+ctx.rect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = canvasBackgroundColor;
+ctx.fill();
+}
 function addImage() {
 var imageSource = addImageHover.getElementsByTagName("input")[0].value;
 img.src = imageSource;
 ctx.drawImage(img, 0, 0);
 }
 function addText() {
-notify("Text has been automatically centered");
-var text = prompt("Enter text:");
-var textFont0 = prompt("Enter text pixel height:");
-var textFont1 = prompt("Enter text font name:");
+var text = addTextHover.getElementsByTagName("input")[0].value;
+//text height
+var textFont0 = addTextHover.getElementsByTagName("input")[1].value;
+//font name
+var textFont1 = addTextHover.getElementsByTagName("input")[2].value;
 var textFont = textFont0 + "px " + textFont1;
-var textColor = prompt("Enter text color:");
+var textColor = addTextHover.getElementsByTagName("input")[3].value
 ctx.font = textFont;
 ctx.fillStyle = textColor;
 ctx.textAlign = "center";
 ctx.fillText(text, canvas.width/2, (canvas.height + (0.5 * textFont0))/2);
 }
-function brushSize() {
-paintbrushWidth = prompt("Enter brushstroke width in pixels:")
+function setBrush() {
+paintbrushWidth = setBrushHover.getElementsByTagName("input")[0].value;
+paintbrushColor = setBrushHover.getElementsByTagName("input")[1].value;
+hide(setBrushHover);
+brushInUse = 1;
+selectBrushButton.classList.remove("off");
 }
-function brushColor() {
-paintbrushColor = prompt("Enter brushstroke color:")
+function toggleBrush() {
+  if (brushInUse == 1) {
+    paintbrushColor = "transparent";
+    paintbrushWidth = 0;
+    brushInUse = 0;
+    selectBrushButton.innerHTML = "Select brush";
+  } else {
+    paintbrushWidth = setBrushHover.getElementsByTagName("input")[0].value;
+    paintbrushColor = setBrushHover.getElementsByTagName("input")[1].value;
+    brushInUse = 1;
+    selectBrushButton.innerHTML = "Unselect brush";
+  }
 }
-function unselectBrush() {
-paintbrushColor = "transparent";
-paintbrushWidth = 0;
+function applyFilters() {
+blurValue = setFilterHover.getElementsByTagName("input")[0].value;
+contrastValue = setFilterHover.getElementsByTagName("input")[1].value;
+brightnessValue = setFilterHover.getElementsByTagName("input")[2].value;
+invertValue = setFilterHover.getElementsByTagName("input")[3].value;
+ctx.filter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + brightnessValue + "%) invert(" + invertValue + "%)";
+hide(setFilterHover);
 }
 function exportF() {
 var fileUrl = canvas.toDataURL();
@@ -129,22 +166,6 @@ function details() {
 var fileUrl = canvas.toDataURL();
 notify("Image details<br>Dimensions: " + canvas.width + " x " + canvas.height + " pixels<br>File type: PNG<br>File size: " + (Math.round((fileUrl.length)*3/4))/1000000 + " MB");
 }
-function setBlur() {
-blurValue = prompt("Enter blur level (0 = no blur):");
-ctx.filter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
-}
-function setContrast() {
-contrastValue = prompt("Enter contrast level (100 is default setting):");
-ctx.filter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
-}
-function setExposure() {
-exposureValue = prompt("Enter exposure level (100 is default setting, 0 is black):");
-ctx.filter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
-}
-function setHueRotate() {
-hueRotateValue = prompt("Enter hue shift number (0 - 360, 0 = no change):");
-ctx.filter = "blur(" + blurValue + "px) contrast(" + contrastValue + "%) brightness(" + exposureValue + "%) hue-rotate(" + hueRotateValue + "deg)";
-}
 function backup() {
 editNumber++;
 localStorage.setItem("recentFile", projectKey);
@@ -163,13 +184,7 @@ function saveFile() {
   }
   }
 }
-function fillPage() {
-var canvasBackgroundColor = fillPageHover.getElementsByTagName("input")[0].value;
-ctx.beginPath();
-ctx.rect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = canvasBackgroundColor;
-ctx.fill();
-}
+
 
 //DRAWING 
 let coord = { x: 0, y: 0 };
