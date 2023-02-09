@@ -216,3 +216,18 @@ button:focus {
   top: 106px;
   left: 175px;
 }
+#add-text-hover {
+  position: absolute;
+  top: 106px;
+  left: 175px;
+}
+#set-brush-hover {
+  position: absolute;
+  top: 106px;
+  left: 175px;
+}
+#set-filter-hover {
+  position: absolute;
+  top: 106px;
+  left: 175px;
+}
