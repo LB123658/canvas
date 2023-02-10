@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editor | Your files</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="icon" href="../images/favicon.png" type="image/png" id="favicon"/>
+<link href="style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link rel="manifest" href="manifest.json" id="manifest">
+</head>
+<body>
+<!-- alert box -->
+<div id="alert">
+<p id="alert-message">There was an error loading this page. Try refreshing the page and making sure javascript is on.</p>
+<button onclick="hide(notification)">Close</button>
+</div>
+
+<!-- control area -->
+<div id="sidebar">
+<button class="fillWidth sidebarButton" style="opacity:1;" onclick="notify('All Editor files are saved here');">Editor files <span class="material-icons">dashboard</span></button>
+<br><br>
+<button class="fillWidth sidebarButton" onclick="location.reload();">Refresh <span class="material-icons">refresh</span></button>
+<button class="fillWidth sidebarButton" onclick="webAppWindow('index.html')">New file <span class="material-icons">add</span></button>
+<br><br>
+<a href="help/index.html" target="_blank">
+<button class="fillWidth sidebarButton">Help <span class="material-icons">help_outline</span></button>
+</a>
+</div>
+<!-- shadow -->
+<div id="shadow"></div>
+
+<div id="page">
+<h1>Your files</h1>
+<!-- storage used -->
+<p id="storage-used">You have used 0 MB out of 5 MB</p>
+<div id="storage-bar-background">
+  <div id="storage-bar"></div>
+</div>
+<!-- end of storage used -->
+</div>
+<script>
+if (navigator.platform.indexOf("Mac") != -1) {
+document.getElementById("manifest").href = "macManifest.json";
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>
