@@ -1,7 +1,7 @@
 {
 	"name":"Editor",
 	"short_name":"Editor",
-	"start_url":"index.html",
+	"start_url":"files/index.html",
 	"display":"standalone",
 	"background_color":"#202124",
 	"theme_color":"#202124",
