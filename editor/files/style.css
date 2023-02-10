@@ -1,0 +1,52 @@
+/* files page specific css */
+#page {
+  background: transparent;
+  text-align: center;
+}
+#sidebar {
+  border-right: 1px solid grey;
+}
+#storage-bar-background {
+  width: 50%;
+  height: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: lightgrey;
+  margin-left: 25%;
+}
+#storage-bar {
+  margin: 0px;
+  float: left;
+  height: 30px;
+  width: 0%;
+  background: #9451a8;
+}
+.file {
+  width: 80%;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: calc(5% - 20px);
+  border-radius: 0px;
+  border: 1px solid grey;
+  border-top: 1px solid #c2bebe;
+  border-right: 1px solid #c2bebe;
+  cursor: default;
+  font-size: 17px;
+}
+.file:hover {
+  color: lightgrey;
+  background: #3d3e42;
+  background-image: linear-gradient(to bottom right, #303134, grey);
+}
+.file:focus {
+  color: white;
+  border: 1px solid grey;
+}
+.file img {
+  margin: 0px;
+  width: 200px;
+  height: 200px;
+}
+.file p {
+  margin-left: 220px;
+}
