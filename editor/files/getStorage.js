@@ -17,3 +17,16 @@ function getAllFiles(input) {
   }
 }
 console.log(getAllFiles(fileLog));
+
+//GET TOTAL LOCAL STORAGE USED
+var x;
+var number = 0;
+function getTotalStorage() {
+  for (i = 0; i < localStorage.length; i++) {
+    x = localStorage.getItem(localStorage.key(i)).length;
+    number = number + x;
+  }
+  number = number / 1000000;
+  console.log(number + " MB");
+}
+getTotalStorage();
