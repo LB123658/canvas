@@ -48,7 +48,7 @@ var fileUrl = localStorage.getItem(fileNum).split(",\"")[1].split("\"")[0];
 var fileSize = Math.round(((fileUrl.length)*3/4)/1000000) + " MB";
 var fileDiv = document.createElement("div");
 fileDiv.classList.add("file");
-fileDiv.onclick = function() {location.replace("../index.html?file=" + fileNum)};
+fileDiv.onclick = function() {webAppWindow("../index.html?file=" + fileNum)};
 fileDiv.innerHTML = "<img src='" + fileUrl + "'> <br> <p>" + fileName + ".png • " + fileSize + "</p>";
 projectDisplay.appendChild(fileDiv);
 }
