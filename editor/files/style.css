@@ -45,4 +45,10 @@
   margin: 0px;
   width: 200px;
   height: 200px;
+  background-image: url(../background.png);
+}
+#project-display {
+  width: 90%;
+  margin: 20px 5% 20px 5%;
+  display: flex;
 }
