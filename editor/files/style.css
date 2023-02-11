@@ -22,10 +22,9 @@
   background: #9451a8;
 }
 .file {
-  width: 80%;
+  width: 200px;
   padding: 20px;
-  margin-top: 20px;
-  margin-left: calc(5% - 20px);
+  margin: 20px 10px 20px 10px;
   border-radius: 0px;
   border: 1px solid grey;
   border-top: 1px solid #c2bebe;
@@ -46,7 +45,4 @@
   margin: 0px;
   width: 200px;
   height: 200px;
-}
-.file p {
-  margin-left: 220px;
 }
