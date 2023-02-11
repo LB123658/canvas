@@ -6,6 +6,8 @@ var storageMessage = page.getElementsByTagName("p")[0];
 var storageBar = document.getElementById("storage-bar");
 var x;
 var number = 0;
+//var fileLog = localStorage.getItem("fileLog").split(",null")[0]; had to be moved down
+var fileLogJs;
 
 //functions
 //basic functions 
@@ -37,14 +39,26 @@ storageMessage.innerHTML = "You have used <span style='background:#9451a8;border
 storageBar.style.width = (100 * (getTotalStorage().split(" MB")[0] / 5)) + "%";
 
 //load files
+var fileLog = localStorage.getItem("fileLog").split(",null")[0];
+
 function loadFilePreview(fileNum) {
 var fileName = localStorage.getItem(fileNum).split("; ")[1].split("\"")[0];
 var fileUrl = localStorage.getItem(fileNum).split(",\"")[1].split("\"")[0];
 var fileSize = Math.round(((fileUrl.length)*3/4)/1000000) + " MB";
 var fileDiv = document.createElement("div");
 fileDiv.classList.add("file");
-fileDiv.innerHTML = "<img src='" + fileUrl + "'> <p>" + fileName + ".png • " + fileSize;
+fileDiv.innerHTML = "<img src='" + fileUrl + "'> <br> <p>" + fileName + ".png • " + fileSize;
 page.appendChild(fileDiv);
 }
-
-//loadFilePreview(fileLog[i]);
+function getFileLog() {
+fileLogJs = `
+  fileLog = ${fileLog};
+  for (i = 0; i < fileLog.length; i++) {
+    loadFilePreview(fileLog[i]);
+  }
+`;
+var script = document.createElement("script");
+script.innerHTML = fileLogJs;
+document.body.appendChild(script);
+}
+getFileLog();
