@@ -8,6 +8,7 @@ var x;
 var number = 0;
 //var fileLog = localStorage.getItem("fileLog").split(",null")[0]; had to be moved down
 var fileLogJs;
+var projectDisplay = document.getElementById("project-display");
 
 //functions
 //basic functions 
@@ -47,14 +48,15 @@ var fileUrl = localStorage.getItem(fileNum).split(",\"")[1].split("\"")[0];
 var fileSize = Math.round(((fileUrl.length)*3/4)/1000000) + " MB";
 var fileDiv = document.createElement("div");
 fileDiv.classList.add("file");
-fileDiv.innerHTML = "<img src='" + fileUrl + "'> <br> <p>" + fileName + ".png • " + fileSize;
-page.appendChild(fileDiv);
+fileDiv.onclick = function() {location.replace("../index.html?file=" + fileNum)};
+fileDiv.innerHTML = "<img src='" + fileUrl + "'> <br> <p>" + fileName + ".png • " + fileSize + "</p>";
+projectDisplay.appendChild(fileDiv);
 }
 function getFileLog() {
 fileLogJs = `
   fileLog = [${fileLog}];
   for (i = 0; i < fileLog.length; i++) {
-    loadFilePreview("'" + fileLog[i] + "'");
+    loadFilePreview(fileLog[i]);
   }
 `;
 var script = document.createElement("script");
