@@ -2,6 +2,7 @@
 #page {
   background: transparent;
   text-align: center;
+  overflow-x: hidden;
 }
 #sidebar {
   border-right: 1px solid grey;
@@ -48,7 +49,8 @@
   background-image: url(../background.png);
 }
 #project-display {
+  overflow-x: auto;
   width: 90%;
   margin: 20px 5% 20px 5%;
-  display: flex;
+  display: inline-block;
 }
