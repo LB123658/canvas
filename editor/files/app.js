@@ -52,9 +52,9 @@ page.appendChild(fileDiv);
 }
 function getFileLog() {
 fileLogJs = `
-  fileLog = ${fileLog};
+  fileLog = [${fileLog}];
   for (i = 0; i < fileLog.length; i++) {
-    loadFilePreview(fileLog[i]);
+    loadFilePreview("'" + fileLog[i] + "'");
   }
 `;
 var script = document.createElement("script");
