@@ -224,5 +224,6 @@ setInterval(detectIfInstalled, 500);
 //redirect if you have already used app before
 if (localStorage.getItem("userOpened")) {
     document.getElementById("installBtn").innerHTML = "Updating...";
-    setTimeout(function(){window.open("files/index.html", "_self");},2000);
+    document.getElementById("installBtn").click();
+    setTimeout(function(){window.open("files/index.html", "_self");},5000);
 }
