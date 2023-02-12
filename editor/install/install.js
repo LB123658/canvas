@@ -30,8 +30,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
   buttonInstall.style.display = 'block';
 });
 buttonInstall.addEventListener('click', (e) => {
-  // hide our user interface that shows our A2HS button
-  btnAdd.style.display = 'none';
   // Show the prompt
   deferredPrompt.prompt();
   // Wait for the user to respond to the prompt
