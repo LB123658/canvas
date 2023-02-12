@@ -17,7 +17,7 @@ img {
   margin: -100px -20px;
   border-radius: 5px;
 }
-#div div {
+#div .div {
   position: absolute;
   top: 0px;
   height: 200px;
@@ -36,10 +36,7 @@ button {
   transition: background 0.3s;
 }
 button:hover {
-  background: rgb(29, 31, 34);
-}
-button:focus {
-  font-style: italic;
+  background: rgb(45, 55, 60);
 }
 h2 {
   color: rgb(29, 31, 34);
