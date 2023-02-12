@@ -1,6 +1,6 @@
 # Editor, a free graphics editor
 
-[Open Editor >](https://lb123658.github.io/canvas/editor/install/index.html)
+[Open Editor >](https://lb123658.github.io/canvas/editor/install.html)
 
 Currently allows
 * Text
