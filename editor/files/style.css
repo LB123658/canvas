@@ -32,6 +32,7 @@
   border-right: 1px solid #c2bebe;
   cursor: default;
   font-size: 17px;
+  display: inline-block;
 }
 .file:hover {
   color: lightgrey;
@@ -49,8 +50,21 @@
   background-image: url(../background.png);
 }
 #project-display {
+  width: 95%;
+  margin: 60px 0% 20px 5%;
+  display: flex;
   overflow-x: auto;
-  width: 90%;
-  margin: 20px 5% 20px 5%;
-  display: inline-block;
+  /* firefox */
+  scrollbar-width: none;
+}
+#project-display::-webkit-scrollbar {
+  display: auto;
+  height: 10px;
+}
+#project-display::-webkit-scrollbar-thumb {
+background: #9451a8;
+border-radius: 0px;
+}
+#project-display::-webkit-scrollbar-track {
+background: transparent;
 }
