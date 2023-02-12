@@ -216,7 +216,7 @@ h2.innerHTML = "Install Editor for " + type;
 function detectIfInstalled() {
   if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById("installBtn").innerHTML = "Installing...";
-    setTimeout(function(){window.open("index.html", "_self");},2000);
+    setTimeout(function(){window.open("files/index.html", "_self");},2000);
   }
 }
 setInterval(detectIfInstalled, 500);
