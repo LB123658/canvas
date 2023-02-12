@@ -4,6 +4,9 @@ var type;
 //for custom pages
 var macH2;
 var css = document.getElementsByTagName("link")[2];
+var supportedOption;
+var supportedFunction;
+var description;
 
 //automatoc light/dark mode
 const body = document.body;
@@ -15,6 +18,24 @@ if (window.matchMedia &&
 }
 
 //get device type and show custom page
+if (navigator.userAgent.includes("Chrome")) {
+  supportedOption = "GET";
+  supportedFunction = "install()";
+  description = "app";
+} else if (navigator.userAgent.includes("Safari") && navigator.userAgent.includes("Chrome") == false){
+  supportedOption = "OPEN";
+  supportedFunction = "window.open('index.html', '_self')";
+  description = "(app not supported on Safari)";
+} else if (navigator.userAgent.includes("Firefox")){
+  supportedOption = "OPEN";
+  supportedFunction = "window.open('index.html', '_self')";
+  description = "(app not supported on Firefox)";
+} else {
+  supportedOption = "OPEN";
+  supportedFunction = "window.open('index.html', '_self')";
+  description = "(app not supported on this browser)";
+}
+
 var mac = `
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -86,11 +107,13 @@ var mac = `
     top: 175px;
     left: 30px;
     height: 100px;
+    width: calc(100% - 60px);
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
   }
   .square {
-    width: 120px;
+    width: 16.6%;
     height: 100px;
     text-align: center;
     background: transparent;
@@ -116,8 +139,8 @@ var mac = `
   <img id="logo" src="images/favicon.png">
   <div id="app-name">
   <h2>Editor</h2>
-    <p>A free graphics editor app</p>
-    <button id="installBtn" onclick="install()">GET</button>
+    <p>A free graphics editor ${description}</p>
+    <button id="installBtn" onclick="${supportedFunction}">${supportedOption}</button>
   </div>
   <hr id="hr-1">
   <div id="bar">
@@ -158,6 +181,7 @@ function loadPage(system) {
   css.remove();
 	page.innerHTML = system;
 }
+
 if (navigator.platform.indexOf("Mac") != -1) {
 type = "MacOS";
 loadPage(mac);
@@ -187,3 +211,12 @@ h2.innerHTML = "Install Editor for " + type;
     function install() {
     if (beforeInstallPrompt) beforeInstallPrompt.prompt();
     }
+    
+//redirect page when installed    
+function detectIfInstalled() {
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    document.getElementById("installBtn").innerHTML = "Installing...";
+    setTimeout(function(){window.open("index.html", "_self");},2000);
+  }
+}
+setInterval(detectIfInstalled, 500);
