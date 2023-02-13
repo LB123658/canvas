@@ -10,9 +10,6 @@ var number = 0;
 var fileLogJs;
 var projectDisplay = document.getElementById("project-display");
 
-//set userOpened to on
-localStorage.setItem("userOpened","true");
-
 //functions
 //basic functions 
 function show(element) {
