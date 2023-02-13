@@ -26,6 +26,9 @@
 <a href="../help/index.html" target="_blank">
 <button class="fillWidth sidebarButton">Help <span class="material-icons">help_outline</span></button>
 </a>
+<a href="../install.html" target="_self">
+<button class="fillWidth sidebarButton" id="install-button-prompt">Install app <span class="material-icons">download</span></button>
+</a>
 </div>
 <!-- shadow -->
 <div id="shadow"></div>
@@ -43,6 +46,11 @@
 <script>
 if (navigator.platform.indexOf("Mac") != -1) {
 document.getElementById("manifest").href = "macManifest.json";
+}
+if (localStorage.getItem("userOpened") == "true") {
+  document.getElementById("install-button-prompt").remove();
+} else {
+  document.getElementById("install-button-prompt").style.animationName = "install-prompt 1s";
 }
 </script>
 <script src="app.js"></script>
