@@ -50,7 +50,8 @@ document.getElementById("manifest").href = "macManifest.json";
 if (localStorage.getItem("userOpened") == "true") {
   document.getElementById("install-button-prompt").remove();
 } else {
-  document.getElementById("install-button-prompt").style.animationName = "install-prompt 1s";
+  document.getElementById("install-button-prompt").style.animationName = "install-prompt";
+  document.getElementById("install-button-prompt").style.animationDuration = "2s";
 }
 </script>
 <script src="app.js"></script>
