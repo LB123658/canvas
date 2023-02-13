@@ -216,13 +216,14 @@ h2.innerHTML = "Install Editor for " + type;
 function detectIfInstalled() {
   if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById("installBtn").innerHTML = "Installing...";
+    localStorage.setItem("userOpened","true");
     setTimeout(function(){window.open("files/index.html", "_self");},2000);
   }
 }
 setInterval(detectIfInstalled, 500);
 
 //redirect if you have already used app before
-if (localStorage.getItem("userOpened")) {
+if (localStorage.getItem("userOpened") == "true") {
     document.getElementById("installBtn").innerHTML = "Updating...";
     document.getElementById("installBtn").click();
     setTimeout(function(){window.open("files/index.html", "_self");},5000);
