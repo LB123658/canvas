@@ -46,7 +46,7 @@ var mac = `
     -webkit-user-select: none;
   }
   body {
-  overflow: hidden;
+  overflow-x: hidden;
   }
   #logo {
     position: absolute;
@@ -135,6 +135,38 @@ var mac = `
     color: rgb(153, 154, 155);
     font-size: 10px;
   }
+  #screenshot-div {
+    position: absolute;
+    top: 310px;
+    left: 30px;
+    width: calc(100% - 30px);
+    display: flex;
+    overflow-x: auto;
+  }
+  #screenshot-div img {
+    width: 500px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin-right: 30px;
+  }
+  #about-div {
+    position: absolute;
+    top: 655px;
+    left: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgb(0, 0, 0, 0.5);
+    color: white;
+    width: calc(100% - 100px);
+  }
+  #about-div::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    height: 30px;
+    width: 100%;
+    background: transparent;
+  }
   </style>
   <img id="logo" src="images/favicon.png">
   <div id="app-name">
@@ -176,6 +208,16 @@ var mac = `
     </div>
   </div>
   <hr id="hr-2">
+  <div id="screenshot-div">
+    <img src="install/screenshot.png">
+    <img src="install/example.png">
+  </div>
+  <div id="about-div">
+    <strong>Editor: a free graphics editor</strong>
+    <br>
+    <p style="color:white">Editor is supported as a web app on Google Chrome and Brave, or just a regular website on any other browser. Editor allows you to temporarily save up to 5 MB of files in your browser and download unlimited files for free. <br><br> Editor does not track any data from its users and does not require creating an account. 
+    </p>
+  </div>
 `;
 function loadPage(system) {
   css.remove();
