@@ -123,7 +123,15 @@ selectBrushButton.classList.add("off");
 // EDITOR BUTTON FUNCTIONS
 //functions
 function webAppWindow(website) {
-  window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    window.open(website, "_blank", "toolbar=no, status=no, titlebar=no, scrollbars=yes,resizable=yes,top=50,left=50,width=1180,height=790");
+  } else {
+    var a = document.createElement("a");
+    a.href = website;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 }
 function fillPage() {
 var canvasBackgroundColor = fillPageHover.getElementsByTagName("input")[0].value;
